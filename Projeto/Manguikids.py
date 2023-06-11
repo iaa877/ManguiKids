@@ -65,17 +65,17 @@ while True:  # Looping infinito
         else:
             print("Obrigado pela avaliação!")
 
-    medalhas = {0: "medalha1", 30: "medalha2", 60: "medalha3"}
+    distintivo = {0: "distintivo1", 30: "distintivo2", 60: "distintivo3"}
 
-    def recompensas(pontuacao: int, medalhas: dict):
-        for pontos, medalha in sorted(medalhas.items(), reverse=True):
+    def recompensas(pontuacao: int, distintivo: dict):
+        for pontos, distintivo in sorted(distintivo.items(), reverse=True):
             if pontuacao >= pontos:
-                return medalha
-        return "Nenhuma medalha"
+                return distintivo
+        return "Nenhum distintivo"
 
     if login(usuario, senha):
         escolha_livros(livros)
         avaliacao()
         pontuacao = int(input("Informe a pontuação feita pelo usuário: "))
-        medalha_recebida = recompensas(pontuacao, medalhas)
-        print("Medalha recebida:", medalha_recebida)
+        distintivo_recebido = recompensas(pontuacao, distintivo)
+        print("Distintivo recebido:", distintivo_recebido)
