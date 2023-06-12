@@ -2,7 +2,8 @@
 O ManguiKids é um aplicativo didático interativo desenvolvido com o objetivo de construir conhecimento contínuo e transmitir os valores da cultura Mangue beat. Ele oferece uma trilha composta por diversas histórias acompanhadas por elementos de gamificação durante a leitura, promovendo uma constante interação com o usuário.
 <h1 align="center">
 <img src="https://github.com/iaa877/ManguiKids/assets/101649965/e3f87a70-d72d-4754-9857-e31109140505" width="600" height="350" />
-</h1>
+</h1> 
+
 ## Características Principais
 
 1. **Trilha de Histórias**: O aplicativo ManguiKids apresenta uma trilha de histórias que aborda diferentes temas relacionados à cultura Mangue beat. As histórias são cuidadosamente selecionadas para envolver e educar as crianças, transmitindo os valores e ensinamentos do movimento.
