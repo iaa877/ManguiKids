@@ -28,13 +28,11 @@ O ManguiKids é um aplicativo didático interativo desenvolvido com o objetivo d
 
 4. **Distintivos**: Após realizar cada leitura e gamificação proposta os usuários receberam um distintivo que será armazenado no seu álbum de figuras.
 
-5. **Avaliação**: Ao concluir a leitura e gamificação de cada história, os usuários têm a oportunidade de avaliar sua satisfação, fornecendo uma classificação de 0 a 5 estrelas.
+5. **Progressão na Trilha**: Após concluir a leitura da primeira história, os usuários podem avançar para a próxima história na sequência da trilha. O aplicativo apresenta automaticamente a próxima história disponível.
 
-6. **Progressão na Trilha**: Após concluir a leitura da primeira história, os usuários podem avançar para a próxima história na sequência da trilha. O aplicativo apresenta automaticamente a próxima história disponível.
+6. **Visualizar Distintivos**: Os usuários tem a opção de visualizar todos os distintivos que conquistados
 
-7. **Visualizar Distintivos**: Os usuários tem a opção de visualizar todos os distintivos que conquistados
-
-8. **Sair da Conta**: Os usuários têm a opção de sair de sua conta, encerrando a sessão atual.
+7. **Sair da Conta**: Os usuários têm a opção de sair de sua conta, encerrando a sessão atual.
 
 
 ## Como executar o aplicativo
