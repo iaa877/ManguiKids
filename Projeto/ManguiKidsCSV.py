@@ -1,4 +1,6 @@
+import csv
 import os
+
 os.system("cls")
 
 usuarios = []
@@ -7,11 +9,16 @@ def exibir_menu():
     print("MENU:")
     print("1. Login")
     print("2. Cadastro")
+    print("3. Sair")
 
 def cadastro(usuario: str, senha: str, email: str):
     for u in usuarios:
         if u["usuario"] == usuario:
-            return False  # Usuário já existe, retorno False
+            return False  
+
+    if "@" not in email or "." not in email:
+        return False  
+
     usuarios.append({"usuario": usuario, "senha": senha, "email": email})
     return True
 
@@ -21,61 +28,84 @@ def login(usuario: str, senha: str):
             return True
     return False
 
-while True:  # Looping infinito
-    opcao = ""
-    while opcao not in ["1", "2"]:
-        exibir_menu()
-        opcao = input("Digite a opção desejada (1 ou 2): ")
+def salvar_usuarios():
+    try:
+        with open("usuarios.csv", "w", newline="") as file:
+            writer = csv.DictWriter(file, fieldnames=["usuario", "senha", "email"])
+            writer.writeheader()
+            writer.writerows(usuarios)
+    except Exception as e:
+        print("Erro ao salvar usuários:", str(e))
 
-    if opcao == "1":
-        usuario = input("Digite o nome de usuário: ")
-        senha = input("Digite a senha: ")
-        if login(usuario, senha):
-            print("Login efetuado com sucesso!")
-            # Restante do código após o login...
+def carregar_usuarios():
+    try:
+        if os.path.exists("usuarios.csv"):
+            with open("usuarios.csv", "r") as file:
+                reader = csv.DictReader(file)
+                for row in reader:
+                    usuarios.append(row)
+    except Exception as e:
+        print("Erro ao carregar usuários:", str(e))
+
+carregar_usuarios()
+
+logado = False
+
+while True:
+    try:
+        if logado:
+            print("Bem-vindo! O que você deseja fazer?")
+            print("1. Escolher livro")
+            print("2. Avaliação")
+            print("3. Sair da conta")
+            opcao = input("Digite a opção desejada (1, 2 ou 3): ")
+            if opcao == "1":
+                livros = {"Livro1": "texto1", "Livro2": "texto2", "Livro3": "texto3"}
+                print("Escolha um livro para ler:")
+                for livro in livros:
+                    print(livro)
+                escolha = input("Digite o nome do livro: ")
+                if escolha in livros:
+                    print("Você escolheu:", escolha)
+                    print("Texto do livro:", livros[escolha])
+                else:
+                    print("Livro não encontrado.")
+            elif opcao == "2":
+                estrelas = int(input("Avalie sua satisfação com a leitura de 0 a 5: "))
+                if estrelas < 0 or estrelas > 5:
+                    print("Avaliação inválida. Digite um valor entre 0 e 5.")
+                else:
+                    print("Obrigado pela avaliação!")
+            elif opcao == "3":
+                logado = False
+                print("Conta encerrada. Volte sempre!")
+            else:
+                print("Opção inválida. Tente novamente.")
         else:
-            print("Usuário ou senha incorretos. Tente novamente.")
-    elif opcao == "2":
-        usuario = input("Digite o nome de usuário: ")
-        senha = input("Digite a senha: ")
-        email = input("Digite o e-mail: ")
-        if cadastro(usuario, senha, email):
-            print("Cadastro realizado com sucesso!")
-            # Restante do código após o cadastro...
-        else:
-            print("Nome de usuário já existente. Tente novamente.")
+            exibir_menu()
+            opcao = input("Digite a opção desejada (1, 2 ou 3): ")
+            if opcao == "1":
+                usuario = input("Digite o nome de usuário: ")
+                senha = input("Digite a senha: ")
+                if login(usuario, senha):
+                    logado = True
+                    print("Login efetuado com sucesso!")
+                else:
+                    print("Usuário ou senha incorretos. Tente novamente.")
+            elif opcao == "2":
+                usuario = input("Digite o nome de usuário: ")
+                senha = input("Digite a senha: ")
+                email = input("Digite o e-mail: ")
+                if cadastro(usuario, senha, email):
+                    print("Cadastro realizado com sucesso!")
+                else:
+                    print("Nome de usuário já existente ou e-mail inválido. Tente novamente.")
+            elif opcao == "3":
+                print("Encerrando o programa...")
+                break
+            else:
+                print("Opção inválida. Tente novamente.")
 
-    livros = {"Livro1": "texto1", "Livro2": "texto2", "Livro3": "texto3"}
-
-    def escolha_livros(livros: dict):
-        print("Escolha um livro para ler:")
-        for livro in livros:
-            print(livro)
-        escolha = input("Digite o nome do livro: ")
-        if escolha in livros:
-            print("Você escolheu:", escolha)
-            print("Texto do livro:", livros[escolha])
-        else:
-            print("Livro não encontrado.")
-
-    def avaliacao():
-        estrelas = int(input("Avalie sua satisfação com a leitura de 0 a 5: "))
-        if estrelas < 0 or estrelas > 5:
-            print("Avaliação inválida. Digite um valor entre 0 e 5.")
-        else:
-            print("Obrigado pela avaliação!")
-
-    medalhas = {0: "medalha1", 30: "medalha2", 60: "medalha3"}
-
-    def recompensas(pontuacao: int, medalhas: dict):
-        for pontos, medalha in sorted(medalhas.items(), reverse=True):
-            if pontuacao >= pontos:
-                return medalha
-        return "Nenhuma medalha"
-
-    if login(usuario, senha):
-        escolha_livros(livros)
-        avaliacao()
-        pontuacao = int(input("Informe a pontuação feita pelo usuário: "))
-        medalha_recebida = recompensas(pontuacao, medalhas)
-        print("Medalha recebida:", medalha_recebida)
+        salvar_usuarios()
+    except Exception as e:
+        print("Ocorreu um erro:", str(e))
