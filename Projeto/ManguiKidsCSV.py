@@ -74,7 +74,7 @@ while True:
                     print("Você escolheu:", escolha)
                     print("Texto do livro:", livros[escolha])
                     medalhas = {0: "Carangueijo de bronze", 30: "Caragueijo de Prata", 60: "Carangueijo de Ouro"}
-                    pontuacao = int(input("Digite a sua pontuação: ")) # Assuming the user enters their score
+                    pontuacao = int(input("Digite a sua pontuação: "))
                     print("Você ganhou o distintivo:", recompensas(pontuacao, medalhas))
                 else:
                     print("Livro não encontrado.")
