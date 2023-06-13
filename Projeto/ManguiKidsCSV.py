@@ -47,6 +47,12 @@ def carregar_usuarios():
     except Exception as e:
         print("Erro ao carregar usuários:", str(e))
 
+def recompensas(pontuacao: int, medalhas: dict):
+    for pontos, medalha in sorted(medalhas.items(), reverse=True):
+        if pontuacao >= pontos:
+            return medalha
+    return "Nenhuma medalha"
+
 carregar_usuarios()
 
 logado = False
@@ -56,9 +62,8 @@ while True:
         if logado:
             print("Bem-vindo! O que você deseja fazer?")
             print("1. Escolher livro")
-            print("2. Avaliação")
-            print("3. Sair da conta")
-            opcao = input("Digite a opção desejada (1, 2 ou 3): ")
+            print("2. Sair da conta")
+            opcao = input("Digite a opção desejada (1 ou 2): ")
             if opcao == "1":
                 livros = {"Livro1": "texto1", "Livro2": "texto2", "Livro3": "texto3"}
                 print("Escolha um livro para ler:")
@@ -68,15 +73,12 @@ while True:
                 if escolha in livros:
                     print("Você escolheu:", escolha)
                     print("Texto do livro:", livros[escolha])
+                    medalhas = {0: "medalha1", 30: "medalha2", 60: "medalha3"}
+                    pontuacao = int(input("Digite a sua pontuação: ")) # Assuming the user enters their score
+                    print("Sua medalha é:", recompensas(pontuacao, medalhas))
                 else:
                     print("Livro não encontrado.")
             elif opcao == "2":
-                estrelas = int(input("Avalie sua satisfação com a leitura de 0 a 5: "))
-                if estrelas < 0 or estrelas > 5:
-                    print("Avaliação inválida. Digite um valor entre 0 e 5.")
-                else:
-                    print("Obrigado pela avaliação!")
-            elif opcao == "3":
                 logado = False
                 print("Conta encerrada. Volte sempre!")
             else:
